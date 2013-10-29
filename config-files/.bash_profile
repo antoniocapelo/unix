@@ -2,11 +2,28 @@
 source ~/.git-prompt.sh
 source ~/.git-completion.sh
  
+# be nice
+alias please=sudo
+
 # alias to quickly show if any Handbrake processes are running
 alias hb='sudo ps -aef | grep HandBrakeCLI'
 
+# Reload bash settings after changes
+alias reload_profile=". ~/.bash_profile"
+
 # alias for quick DNS cache flushing
 alias fc='sudo dscacheutil -flushcache'
+
+# Create a new directory and enter it
+function mkcd() {
+    mkdir -p "$@" && cd "$@"
+}
+
+# Remove a direcory and its files
+function removedir() {
+    rm -rf "$@"
+}
+
 
 #alias de comandos
 alias cdlei='cd ~/Dropbox/LEI'
@@ -50,6 +67,13 @@ NORMAL=$(tput sgr0)
 BLINK=$(tput blink)
 REVERSE=$(tput smso)
 UNDERLINE=$(tput smul)
+
+
+# Git Stuff
+
+# Git push origin master
+alias gitpom='git push origin master'
+
 
 # set the prompt to show current working directory and git branch name, if it exists
 
