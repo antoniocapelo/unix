@@ -14,6 +14,9 @@ alias reload_profile=". ~/.bash_profile"
 # alias for quick DNS cache flushing
 alias fc='sudo dscacheutil -flushcache'
 
+#git status
+alias gs='git status'
+
 # Create a new directory and enter it
 function mkcd() {
     mkdir -p "$@" && cd "$@"
