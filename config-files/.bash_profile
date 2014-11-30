@@ -1,9 +1,18 @@
 # enable the git bash completion commands
-source ~/.git-prompt.sh
-source ~/.git-completion.sh
+#source ~/.git-prompt.sh
+#source ~/.git-completion.sh
  
 # be nice
 alias please=sudo
+
+# a better grep
+# alias grep='/usr/local/bin/ggrep --color'
+
+## execute sicstus
+alias sics='cd /usr/local/sicstus4.2.3/bin && ./sicstus'
+# case insensitive tab completion
+bind "set completion-ignore-case on"
+
 
 # alias to quickly show if any Handbrake processes are running
 alias hb='sudo ps -aef | grep HandBrakeCLI'
@@ -16,6 +25,18 @@ alias fc='sudo dscacheutil -flushcache'
 
 #git status
 alias gs='git status'
+
+#git checkout 
+alias gco='git checkout'
+
+#git branches
+alias branches='git branch -v -a'
+
+#grunt serve
+alias gruntcenas='grunt serve'
+
+#javascript console
+alias jsc='/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc'
 
 # Create a new directory and enter it
 function mkcd() {
@@ -55,6 +76,13 @@ GIT_PS1_SHOWSTASHSTATE="."
 # enable showing of HEAD vs its upstream
 GIT_PS1_SHOWUPSTREAM="auto"
 
+
+## Some Tips from https://github.com/kintoandar/dotfiles/blob/master/.bashrc ##
+
+alias ll='ls -lha --color=auto'
+alias vi='vim'
+alias diffcookbook='diff -wru $(ls|sort|head -n1) $(ls|sort|tail -n1)|vim -'
+
 BLACK=$(tput setaf 0)
 RED=$(tput setaf 1)
 GREEN=$(tput setaf 2)
@@ -88,7 +116,8 @@ alias gitpom='git push origin master'
 # this is a cyan username, @ symbol and host, magenta current working directory and white git branch
 # it uses the shorter , but visibly more complex, codes for text colours (shorter because the colour code definitions aren't needed)
 # PS1='\[\033[0;36m\]\u@\h\[\033[01m\]:\[\033[0;35m\]\w\[\033[00m\]\[\033[1;30m\]\[\033[0;37m\]`__git_ps1 " (%s)"`\[\033[00m\]\[\033[0;37m\]\$ '
-PS1='\[\033[0;36m\]\u \[\033[00m\]in: \[\033[0;35m\]\w\[\033[00m\]\[\033[1;30m\]\[\033[0;37m\]`__git_ps1 " (%s)"`\[\033[00m\]\[\033[0;37m\]\n- '
+PS1='\[\033[0;36m\]\u \[\033[00m\]in: \[\033[0;35m\]\w\[\033[00m\]\[\033[1;30m\]\[\033[0;37m\]` `\[\033[00m\]\[\033[0;37m\]\n- '
+# PS1='\[\033[0;36m\]\u \[\033[00m\]in: \[\033[0;35m\]\w\[\033[00m\]\[\033[1;30m\]\[\033[0;37m\]`__git_ps1 " (%s)"`\[\033[00m\]\[\033[0;37m\]\n- '
 # PS1='\[\033[0;36m\]\u \[\033[00m\]in: \[\033[0;35m\]\w\[\033[00m\]\[\033[1;30m\]\[\033[0;37m\]`__git_ps1 " (%s)"`\[\033[00m\]\[\033[0;37m\]\n`set_prefix2` '
 
 # return the prompt prefix for the second line
@@ -121,11 +150,26 @@ function set_prefix2 {
 # PS1='${MAGENTA}\u${WHITE} in ${GREEN}\w${WHITE}${MAGENTA}`__git_ps1 " on %s"`${WHITE}\r\n`set_prefix`${NORMAL}${CYAN}\033[s\033[1C 
 # PS1='${MAGENTA}\u${WHITE} in ${GREEN}\w${WHITE}${MAGENTA}`__git_ps1 " on %s"`${WHITE}\r\n`set_prefix`${NORMAL}${CYAN}\033[s\033[60C (`date "+%a, %b %d"`)\033[u${WHITE} '
 #PS1='${MAGENTA}\u${WHITE} in ${GREEN}\w${WHITE}${MAGENTA}`__git_ps1 " on %s"`${WHITE}\r\n`set_prefix`${NORMAL}${CYAN}\033[s\033[1C '
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin:/usr/texbin:/Users/Capelo/.rvm/bin
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin:/usr/texbin:/Users/Capelo/.rvm/bin
-export PATH=/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin:/usr/texbin:/Users/Capelo/.rvm/bin source /Users/Capelo/.bash_profile
-eval "$(rbenv init -)"
-eval "$(rbenv init -)"
-eval "$(rbenv init -)"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.source /Users/Capelo/.rvm/scripts/rvm
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin:/usr/texbin:/Users/Capelo/.rvm/bin
+# export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin:/usr/texbin:/Users/Capelo/.rvm/bin
+# export PATH=/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin:/usr/texbin:/Users/Capelo/.rvm/bin source /Users/antoniocapelo/.bash_profile
+# eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.source /Users/Capelo/.rvm/scripts/rvm
+
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home
+export M2_HOME=/Users/antoniocapelo/workspace/apache-maven-3.2.1
+export M2=/Users/antoniocapelo/workspace/apache-maven-3.2.1/bin
+export PATH=$PATH:$M2
+export PATH=$PATH:$JAVA_HOME/bin
+export PATH=$PATH:/usr/local/sicstus4.2.3/bin
+
+
+export NVM_DIR="/Users/antoniocapelo/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="/Users/antoniocapelo/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="/Users/antoniocapelo/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
