@@ -90,13 +90,29 @@ function mkcd() {
     mkdir -p "$@" && cd "$@"
 }
 
+# Copy w/ progress
+cp_p () {
+  rsync -WavP --human-readable --progress $1 $2
+}
+
 # better ls
 alias ll='ls -lha --color=auto'
 
-# vi equals vim
+# Global aliases
 alias vi='vim'
+alias h="hg"
+alias s="subl"
+alias o="open"
+alias oo="open ."
+
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder"
 
 # Git Stuff -----------------------------
+
+alias g="git"
 
 # Git push origin master
 alias gitpom='git push origin master'
