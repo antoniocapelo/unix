@@ -49,7 +49,10 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/antoniocapelo/workspace/apache-maven-3.2.1/bin:/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/bin:/usr/local/sicstus4.2.3/bin:/Users/antoniocapelo/workspace/apache-maven-3.2.1/bin"
+PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/bin
+PATH=$PATH:/Users/antoniocapelo/workspace/apache-maven-3.2.1/bin
+
+export PATH
 
 ## Sourcing rvm so it can be run as function
 source "$HOME/.rvm/scripts/rvm"
