@@ -3,6 +3,8 @@
 	email = antonio.c.capelo@gmail.com
 [core]
 	editor = subl
+[push]
+	default = simple
 [alias]
 	c = commit -am
 	s = status -s
