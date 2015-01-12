@@ -123,6 +123,9 @@ alias gitpom='git push origin master'
 #git status
 alias gs='git status'
 
+#git diff
+alias gd='git diff'
+
 #git checkout 
 alias gco='git checkout'
 
