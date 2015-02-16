@@ -1,11 +1,15 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-
+export TERM="xterm-256color"
+# source /Library/Python/2.7/site-packages/powerline/bindings/zsh/powerline.zsh 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="ys"
+# ZSH_THEME="solarized-powerline"
+ZSH_THEME="agnoster"
+# ZSH_THEME="powerline"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,13 +53,20 @@ plugins=(git)
 
 # User configuration
 
+export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
+export ANDROID_HOME=/Users/capelo/workspace/android-sdk-macosx
+
 PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/bin
-PATH=$PATH:/Users/antoniocapelo/workspace/apache-maven-3.2.1/bin
+PATH=$PATH:/Users/capelo/workspace/apache-maven-3.2.5/bin
+PATH=$PATH:/Users/capelo/workspace/apache-maven-3.2.5/bin/mvn
+PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
 export PATH
 
+
+
 ## Sourcing rvm so it can be run as function
-source "$HOME/.rvm/scripts/rvm"
+## source "$HOME/.rvm/scripts/rvm"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 source $ZSH/oh-my-zsh.sh
@@ -107,7 +118,7 @@ alias h="hg"
 alias s="subl"
 alias o="open"
 alias oo="open ."
-
+alias mvim="/Applications/MacVim.app/contents/MacOS/MacVim"
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder"
@@ -142,3 +153,6 @@ alias npmo='sudo npm'
 
 # be nice
 alias please=sudo
+
+# Poweline Stuf -------------------------
+
