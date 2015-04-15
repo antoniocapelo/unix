@@ -7,6 +7,11 @@ if !has("gui_running")
     let g:solarized_termcolors=256
 endif
 
+" Treat ejs files as html
+if has("autocmd")
+  au BufRead,BufNewFile *.ejs setfiletype html
+endif
+
 colorscheme solarized
 set background=dark
 "
@@ -141,14 +146,27 @@ Plugin 'elzr/vim-json'
 Plugin 'git://git.wincent.com/command-t.git' 
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'L9'
-
+Plugin 'Raimondi/delimitMate'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'tmhedberg/matchit'
-
+Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-fugitive'
+Plugin 'burnettk/vim-angular'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-unimpaired'
+
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+Bundle "claco/jasmine.vim"
+
+" Optional:
+Bundle "honza/vim-snippets"
 
 " NOTE: All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -183,7 +201,7 @@ set ruler              " show the cursor position all the time
 set scrolloff=3        " Never lean to the top or bottom of the window
 set showcmd            " Show (partial) command in status line.
 set showmatch          " Show matching brackets.
-set softtabstop=2 tabstop=2 shiftwidth=2 expandtab " Default whitespace settings
+set softtabstop=2 tabstop=2 shiftwidth=4 expandtab " Default whitespace settings
 set completeopt=menuone,longest,preview " Better completion menu
 
 " Set filetypes
@@ -191,4 +209,71 @@ au BufRead,BufNewFile *.json set filetype=json
 
 " JavaScript libraries syntax
 let g:used_javascript_libs = 'angularjs,react,underscore'
+let g:ctrlp_open_new_file = 'v'
+let g:ctrlp_open_multiple_files = 'v'
 
+let g:SuperTabDefaultCompletionType = "context"
+
+" Mappings for diffing and merging
+map ]] ]c
+map [[ [c
+
+" Usign ,2 ,3 and ,4 for diffgetting LOCAL, BASE and REMOTE
+map <silent> <leader>2 :diffget 2<CR> :diffupdate<CR>
+map <silent> <leader>3 :diffget 3<CR> :diffupdate<CR>
+map <silent> <leader>4 :diffget 4<CR> :diffupdate<CR>
+
+" delete without yanking
+nnoremap <silent> <leader>d "_d
+vnoremap <silent> <leader>d "_d
+
+" Accessing system clipboard
+vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
+nmap <C-x> :call setreg("\"",system("pbpaste"))<CR>p
+
+" Set the splits to the logical direction
+set splitbelow
+set splitright
+
+" Use Ctrl-j and Ctrl-k for navigation to same indentation
+nnoremap <C-k> :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' . line('.') . 'l\S', 'be')<CR>
+nnoremap <C-j> :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%>' . line('.') . 'l\S', 'e')<CR>
+
+" Use ,W to strip all trailing whitespace on current file
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" ,ft to fold HTML tags
+nnoremap <leader>ft Vatzf
+
+" ,v to reselect the text that was just pasted to perform commands (like indentation) on it
+nnoremap <leader>v V`]
+
+" use jj to exit back to Normal Mode (nice tip from Steve Losh)
+inoremap jj <ESC>
+
+" ,w to a new vertical split
+nnoremap <leader>w <C-w>v<C-w>l
+
+" clean search by pressing ,/
+nmap <silent> ,/ :nohlsearch<CR>
+
+" use ,l and ,h to move between left-right windows
+nmap <leader>l <C-w>l
+nmap <leader>h <C-w>h
+
+"visual selection of the lines that have the same indent level or more as the current line.
+function! SelectIndent ()
+  let temp_var=indent(line("."))
+  while indent(line(".")-1) >= temp_var
+    exe "normal k"
+  endwhile
+  exe "normal V"
+  while indent(line(".")+1) >= temp_var
+    exe "normal j"
+  endwhile
+endfun
+nmap <leader>i :call SelectIndent()
+
+" settings for vim markdown files
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_frontmatter=1
