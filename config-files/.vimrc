@@ -149,7 +149,6 @@ Plugin 'L9'
 Plugin 'Raimondi/delimitMate'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'tmhedberg/matchit'
 Plugin 'ervandew/supertab'
@@ -157,13 +156,24 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'burnettk/vim-angular'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'vim-scripts/gitignore'
+
+" vim easy find accross current dir
+Plugin 'dkprice/vim-easygrep'
+Plugin 'mxw/vim-jsx'
+Plugin 'suan/vim-instant-markdown'
+Plugin 'vim-scripts/copypath.vim'
+Plugin 'isRuslan/vim-es6'
+Plugin 'mustache/vim-mustache-handlebars'
 
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
-Bundle "claco/jasmine.vim"
+" Bundle "claco/jasmine.vim"
+Bundle 'glanotte/vim-jasmine'
+Bundle "justinj/vim-react-snippets"
 
 " Optional:
 Bundle "honza/vim-snippets"
@@ -184,6 +194,7 @@ set pastetoggle=<F2>  " Temporarily switch to “paste mode”
 " 4 character tabs and indents 
 set tabstop=4       " 8 is too much
 set shiftwidth=4    " 8 is too much
+set noexpandtab
 
 " Tabs to be expanded to spaces
 set expandtab       " expand tabs
@@ -210,6 +221,7 @@ au BufRead,BufNewFile *.json set filetype=json
 " JavaScript libraries syntax
 let g:used_javascript_libs = 'angularjs,react,underscore'
 let g:ctrlp_open_new_file = 'v'
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_open_multiple_files = 'v'
 
 let g:SuperTabDefaultCompletionType = "context"
@@ -261,6 +273,9 @@ nmap <silent> ,/ :nohlsearch<CR>
 nmap <leader>l <C-w>l
 nmap <leader>h <C-w>h
 
+" ,s to activate or deactive spellcheck
+nnoremap <leader>s :setlocal spell!<cr>
+
 "visual selection of the lines that have the same indent level or more as the current line.
 function! SelectIndent ()
   let temp_var=indent(line("."))
@@ -272,8 +287,40 @@ function! SelectIndent ()
     exe "normal j"
   endwhile
 endfun
-nmap <leader>i :call SelectIndent()
+nmap <leader>i :call SelectIndent()<cr>
 
-" settings for vim markdown files
+" backspace acting as h on visual mode
+:vmap <BS> h
+
+" using Tab for calling out Ctrl-P
+" imap <Tab> <C-P>
+
+inoremap <leader>p <C-x><C-o>
+
+set omnifunc=csscomplete#CompleteCSS
+set omnifunc=syntaxcomplete#Complete
+
+let g:vim_json_syntax_conceal = 0
+
+" vim markdown options
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
+let g:instant_markdown_slow = 0
+let g:instant_markdown_autostart = 0
+nnoremap <leader>md :InstantMarkdownPreview<CR>
+
+" make nerdtree open on the left
+let g:NERDTreeWinPos = "left"
+
+" set jasmine options
+nnoremap <leader>jm :set filetype=jasmine.javascript syntax=jasmine
+
+" nerdtree line numbers
+let NERDTreeShowLineNumbers=1
+
+" indent linebreaks
+:set breakindent
+
+" setting up angular vim
+let g:angular_filename_convention = 'titlecased'
+let g:angular_test_directory = 'test/specs'

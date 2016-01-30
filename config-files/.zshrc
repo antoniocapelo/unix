@@ -53,26 +53,29 @@ plugins=(git)
 
 # User configuration
 
-export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export ANDROID_HOME=/Users/capelo/workspace/android-sdk-macosx
 
-PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/bin
+PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/bin
 PATH=$PATH:/Users/capelo/workspace/apache-maven-3.2.5/bin
 PATH=$PATH:/Users/capelo/workspace/apache-maven-3.2.5/bin/mvn
 PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+PATH=$PATH:/usr/local/mysql/bin
+PATH=$PATH:/Applications/nwjc
+PATH=$PATH:/Applications/nwjs
+PATH=$PATH:~/workspace/Mindera/chromedriver
+export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
 
 export PATH
 
-
-
 ## Sourcing rvm so it can be run as function
-## source "$HOME/.rvm/scripts/rvm"
+source "$HOME/.rvm/scripts/rvm"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -92,10 +95,6 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 
 ## Capelo stuff ------------------------
 
@@ -109,11 +108,17 @@ cp_p () {
   rsync -WavP --human-readable --progress $1 $2
 }
 
+# change the osx vim to the brew one (if it exists)
+#if [ -f /usr/local/bin/vim ]; then
+    #alias vim='/usr/local/bin/vim'
+#fi
+
 # better ls
 alias ll='ls -lha --color=auto'
 
 # Global aliases
 alias vi='vim'
+alias v='vim'
 alias h="hg"
 alias s="subl"
 alias o="open"
@@ -135,7 +140,7 @@ alias gitpom='git push origin master'
 alias gs='git status'
 
 #git diff
-alias gd='git diff'
+alias gd='git difftool'
 
 #git checkout 
 alias gco='git checkout'
@@ -143,6 +148,8 @@ alias gco='git checkout'
 #git branches
 alias branches='git branch -v -a'
 
+# Simple python server -----------------
+alias simpleServer='python -m SimpleHTTPServer'
 
 # Node Stuff ----------------------------
 #grunt serve
@@ -154,5 +161,14 @@ alias npmo='sudo npm'
 # be nice
 alias please=sudo
 
-# Poweline Stuf -------------------------
+alias nw='/Applications/nwjs.app/Contents/MacOS/nwjs'
 
+# previous folder
+alias ...='cd -'
+
+# Powerline Stuf -------------------------
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# Setting vim mode in terminal --------------
+alias vimmode="set -o vi"
