@@ -1,0 +1,39 @@
+" Make vim more useful
+set nocompatible
+
+" Add the g flag to search/replace by default
+set gdefault
+
+" Highlight current line
+set cursorline
+
+" Highlight searches
+set hlsearch
+
+" Ignore case of searches
+set ignorecase
+
+" Highlight dynamically as pattern is typed
+set incsearch
+
+nnoremap <C-k> :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' . line('.') . 'l\S', 'be')<CR>
+nnoremap <C-j> :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%>' . line('.') . 'l\S', 'e')<CR>
+
+" use jj to exit back to Normal Mode (nice tip from Steve Losh)
+inoremap jj <ESC>
+
+" clean search by pressing ,/
+nmap <silent> ,/ :nohlsearch<CR>
+
+" built-in navigation to navigated items works better
+nnoremap <c-o> :action Back<cr>
+nnoremap <c-i> :action Forward<cr>
+" but preserve ideavim defaults
+nnoremap g<c-o> <c-o>
+nnoremap g<c-i> <c-i>
+
+" fold and expand code
+nmap zf :action CollapseRegion<CR>
+nmap za :action ExpandRegion<CR>
+
+
