@@ -64,6 +64,7 @@ PATH=$PATH:/usr/local/mysql/bin
 PATH=$PATH:/Applications/nwjc
 PATH=$PATH:/Applications/nwjs
 PATH=$PATH:~/workspace/Mindera/chromedriver
+PATH=$PATH:~/coding/exercism
 export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
 
 export PATH
@@ -102,6 +103,8 @@ export LANG=en_US.UTF-8
 function mkcd() {
     mkdir -p "$@" && cd "$@"
 }
+
+alias remdir='rm -rf'
 
 # Copy w/ progress
 cp_p () {
@@ -172,3 +175,9 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # Setting vim mode in terminal --------------
 alias vimmode="set -o vi"
+
+# List all open ports (and processes using them)
+alias lsp='sudo lsof -i -n -P | grep LISTEN'
+
+# weather alias
+alias weatherporto='curl http://wttr.in/Porto'

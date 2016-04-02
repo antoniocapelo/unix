@@ -1,15 +1,10 @@
-" FIX: PluginUpdate => git pull: git-sh-setup: No such file or directory in MacVim (OK in non-GUI version of Vim)
+" Theme Options
 if has("gui_macvim")
     set shell=/bin/bash\ -l
 endif
 if !has("gui_running")
     let g:solarized_termtrans=1
     let g:solarized_termcolors=256
-endif
-
-" Treat ejs files as html
-if has("autocmd")
-  au BufRead,BufNewFile *.ejs setfiletype html
 endif
 
 colorscheme solarized
@@ -104,28 +99,28 @@ set scrolloff=3
 
 " Strip trailing whitespace (,ss)
 function! StripWhitespace ()
-	let save_cursor = getpos(".")
-	let old_query = getreg('/')
-	:%s/\s\+$//e
-	call setpos('.', save_cursor)
-	call setreg('/', old_query)
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    :%s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
 endfunction
-noremap <leader>ss :call StripWhitespace ()<CR>
+noremap <leader>sw :call StripWhitespace ()<CR>
+
+function! ReadJSAsJsx() 
+    let g:jsx_ext_required = 0
+endfunction
+
+noremap <leader>x :call ReadJSAsJsx () <CR>
+noremap <leader>sx :set syntax=javascript.jsx<CR>
+noremap <leader>sh :set syntax=html<CR>
+
+
 execute pathogen#infect()
 
 set clipboard=unnamed
 syntax on
 filetype plugin indent on
-
-
-" set background=dark
-" colorscheme solarized
-
-" set background=dark
-" solarized options 
-" let g:solarized_visibility = "high"
-" let g:solarized_contrast = "high"
-" colorscheme solarized
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -134,7 +129,8 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-" VUNDLE BEGIN ----------------------------------------------
+
+" Plugins  ----------------------------------------------
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -165,13 +161,14 @@ Plugin 'suan/vim-instant-markdown'
 Plugin 'vim-scripts/copypath.vim'
 Plugin 'isRuslan/vim-es6'
 Plugin 'mustache/vim-mustache-handlebars'
+"Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
 
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
-" Bundle "claco/jasmine.vim"
 Bundle 'glanotte/vim-jasmine'
 Bundle "justinj/vim-react-snippets"
 
@@ -180,7 +177,7 @@ Bundle "honza/vim-snippets"
 
 " NOTE: All of your Plugins must be added before the following line
 call vundle#end()            " required
-" VUNDLE END ----------------------------
+" Plugins END ----------------------------
 
 filetype plugin indent on    " required
 
@@ -217,6 +214,11 @@ set completeopt=menuone,longest,preview " Better completion menu
 
 " Set filetypes
 au BufRead,BufNewFile *.json set filetype=json
+
+" Treat ejs files as html
+if has("autocmd")
+  au BufRead,BufNewFile *.ejs setfiletype html
+endif
 
 " JavaScript libraries syntax
 let g:used_javascript_libs = 'angularjs,react,underscore'
@@ -324,3 +326,34 @@ let NERDTreeShowLineNumbers=1
 " setting up angular vim
 let g:angular_filename_convention = 'titlecased'
 let g:angular_test_directory = 'test/specs'
+
+" go to tag definition
+nnoremap <leader>d <C-]><CR>
+let g:easytags_always_enabled = 0
+" turn off vimeasy-tags
+nnoremap <leader>e  :let g:easytags_always_enabled = 1<CR>
+
+""" Make configs
+"{{{
+
+  " run python
+  autocmd BufNewFile,BufRead *.py set makeprg=clear;python2.7\ %
+  autocmd BufNewFile,BufRead *.py set autowrite
+
+  " run node.js
+  autocmd BufNewFile,BufRead *.js set makeprg=clear;node\ %
+  autocmd BufNewFile,BufRead *.js set autowrite
+
+  " compile c code
+  autocmd FileType c set makeprg=clear;make\ test
+  autocmd FileType c set autowrite
+
+  " compile LaTeX
+  autocmd BufNewFile,BufRead *.tex set makeprg=clear;pdflatex\ %
+  autocmd BufRead *.tex set autowrite
+
+  " compile Markdown
+  autocmd BufNewFile,BufRead *.md set makeprg=redcarpet\ %\ >/tmp/%<.html
+  autocmd BufNewFile,BufRead *.md set autowrite
+
+"}}}
