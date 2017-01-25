@@ -2,14 +2,23 @@
 if has("gui_macvim")
     set shell=/bin/bash\ -l
 endif
+
 if !has("gui_running")
-    let g:solarized_termtrans=1
-    let g:solarized_termcolors=256
+    "let g:solarized_termtrans=1
+    "let g:solarized_termcolors=256
 endif
 
-colorscheme solarized
+syntax enable
 set background=dark
+colorscheme solarized
+
 "
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+
 " using Source Code Pro
 set anti enc=utf-8
 set guifont=Source\ Code\ Pro:h13
@@ -107,25 +116,16 @@ function! StripWhitespace ()
 endfunction
 noremap <leader>sw :call StripWhitespace ()<CR>
 
-function! ReadJSAsJsx() 
-    let g:jsx_ext_required = 0
-endfunction
-
-noremap <leader>x :call ReadJSAsJsx () <CR>
-noremap <leader>sx :set syntax=javascript.jsx<CR>
-noremap <leader>sh :set syntax=html<CR>
-
-
 execute pathogen#infect()
 
 set clipboard=unnamed
-syntax on
 filetype plugin indent on
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+set iskeyword+=\-
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -139,7 +139,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim' 
 Plugin 'pangloss/vim-javascript' 
 Plugin 'elzr/vim-json' 
-Plugin 'git://git.wincent.com/command-t.git' 
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'L9'
 Plugin 'Raimondi/delimitMate'
@@ -153,7 +152,7 @@ Plugin 'burnettk/vim-angular'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-scripts/gitignore'
-
+Plugin 'leafgarland/typescript-vim'
 " vim easy find accross current dir
 Plugin 'dkprice/vim-easygrep'
 Plugin 'mxw/vim-jsx'
@@ -163,6 +162,13 @@ Plugin 'isRuslan/vim-es6'
 Plugin 'mustache/vim-mustache-handlebars'
 "Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'rhysd/devdocs.vim'
+Plugin 'bentayloruk/vim-react-es6-snippets'
+Plugin 'scrooloose/syntastic'
+Plugin 'triglav/vim-visual-increment'
+Plugin 'flowtype/vim-flow'
+Plugin 'ap/vim-css-color'
 
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
@@ -170,10 +176,19 @@ Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
 Bundle 'glanotte/vim-jasmine'
-Bundle "justinj/vim-react-snippets"
 
 " Optional:
 Bundle "honza/vim-snippets"
+
+function! ReadJSAsJsx() 
+    let g:jsx_ext_required = 0
+endfunction
+
+noremap <leader>x :call ReadJSAsJsx () <CR>
+noremap <leader>sx :set syntax=javascript.jsx<CR>
+noremap <leader>sh :set syntax=html<CR>
+
+
 
 " NOTE: All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -225,6 +240,15 @@ let g:used_javascript_libs = 'angularjs,react,underscore'
 let g:ctrlp_open_new_file = 'v'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_open_multiple_files = 'v'
+
+" Exclude files and directories using Vim's wildignore and CtrlP's own g:ctrlp_custom_ignore:
+" Ignore some folders and files for CtrlP indexing
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.yardoc\|node_modules$',
+  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+  \ }
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 let g:SuperTabDefaultCompletionType = "context"
 
@@ -291,6 +315,9 @@ function! SelectIndent ()
 endfun
 nmap <leader>i :call SelectIndent()<cr>
 
+" devdocs.io binding
+nmap K <Plug>(devdocs-under-cursor)
+
 " backspace acting as h on visual mode
 :vmap <BS> h
 
@@ -321,7 +348,7 @@ nnoremap <leader>jm :set filetype=jasmine.javascript syntax=jasmine
 let NERDTreeShowLineNumbers=1
 
 " indent linebreaks
-:set breakindent
+" set breakindent
 
 " setting up angular vim
 let g:angular_filename_convention = 'titlecased'
@@ -357,3 +384,31 @@ nnoremap <leader>e  :let g:easytags_always_enabled = 1<CR>
   autocmd BufNewFile,BufRead *.md set autowrite
 
 "}}}
+
+"" React abbreviatures
+au filetype javascript :iabbrev RView <View></View>
+au filetype javascript :iabbrev RTxt <Text></Text>
+
+noremap <leader>pfd :put =expand('%:p')<CR>
+
+" Syntastic options
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_mode_map = { 'mode': 'active',
+                          \ 'active_filetypes': ['python', 'javascript'],
+                          \ 'passive_filetypes': [] }
+
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+"let g:syntastic_error_symbol = '✗'
+"let g:syntastic_warning_symbol = '⚠'
+let g:go_list_type = "quickfix"
+let g:syntastic_check_on_wq = 0 
+let g:syntastic_javascript_checkers = ['eslint']
+let s:eslint_path =system('PATH=$(npm bin):$PATH && which eslint')
+let g:syntastic_javascript_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+
+nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>

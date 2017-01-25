@@ -7,9 +7,13 @@ export TERM="xterm-256color"
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="ys"
-# ZSH_THEME="solarized-powerline"
+#ZSH_THEME="solarized-powerline"
 ZSH_THEME="agnoster"
-# ZSH_THEME="powerline"
+#ZSH_THEME="powerline"
+ZSH_POWERLINE_SHOW_IP=false
+ZSH_POWERLINE_SHOW_OS=false
+
+DEFAULT_USER=`whoami`
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,28 +53,34 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+#plugins=(git)
 
 # User configuration
 
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-export ANDROID_HOME=/Users/capelo/workspace/android-sdk-macosx
+export ANDROID_HOME=/Users/capelo/Library/Android/sdk
 
 PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/bin
-PATH=$PATH:/Users/capelo/workspace/apache-maven-3.2.5/bin
-PATH=$PATH:/Users/capelo/workspace/apache-maven-3.2.5/bin/mvn
+PATH=$PATH:/Users/capelo/workspace/apache-maven-3.3.9/bin
+PATH=$PATH:/Users/capelo/workspace/apache-maven-3.3.9/bin/mvn
 PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 PATH=$PATH:/usr/local/mysql/bin
 PATH=$PATH:/Applications/nwjc
 PATH=$PATH:/Applications/nwjs
 PATH=$PATH:~/workspace/Mindera/chromedriver
 PATH=$PATH:~/coding/exercism
-export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
+PATH=$PATH:/usr/local/lib
+PATH=$PATH:$HOME/.node/bin
+PATH=$PATH:$HOME/.rvm/bin
+PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
+PATH=$PATH:/usr/local/bin/eslint
 
 export PATH
 
+export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
+
 ## Sourcing rvm so it can be run as function
-source "$HOME/.rvm/scripts/rvm"
+#source "$HOME/.rvm/scripts/rvm"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 source $ZSH/oh-my-zsh.sh
@@ -148,6 +158,12 @@ alias gd='git difftool'
 #git checkout 
 alias gco='git checkout'
 
+#git commit 
+alias gci='git commit'
+
+#git commit 
+alias gcim='git commit -m'
+
 #git branches
 alias branches='git branch -v -a'
 
@@ -171,8 +187,6 @@ alias ...='cd -'
 
 # Powerline Stuf -------------------------
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
 # Setting vim mode in terminal --------------
 alias vimmode="set -o vi"
 
@@ -181,3 +195,27 @@ alias lsp='sudo lsof -i -n -P | grep LISTEN'
 
 # weather alias
 alias weatherporto='curl http://wttr.in/Porto'
+
+# ranger alias
+alias ra='ranger'
+
+# z jumper init
+. /Users/capelo/workspace/github_repos/z/z.sh
+
+export NVM_DIR="/Users/capelo/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Calling nvm use automatically in a directory with a .nvmrc file
+autoload -U add-zsh-hook
+load-nvmrc() {
+  if [[ -f .nvmrc && -r .nvmrc ]]; then
+      nvm use
+    fi
+}
+add-zsh-hook chpwd load-nvmrc
+
+# VEX AQA stuff
+alias startMockServer="mvn mockserver:runForked -Ptest -pl frontend-tests"
+alias stopMockServer="mvn mockserver:stopForked -Ptest -pl frontend-tests"
+alias runAQATests="mvn -Ptest -pl frontend-tests test"
+

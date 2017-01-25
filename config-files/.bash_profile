@@ -116,7 +116,7 @@ alias gitpom='git push origin master'
 # this is a cyan username, @ symbol and host, magenta current working directory and white git branch
 # it uses the shorter , but visibly more complex, codes for text colours (shorter because the colour code definitions aren't needed)
 # PS1='\[\033[0;36m\]\u@\h\[\033[01m\]:\[\033[0;35m\]\w\[\033[00m\]\[\033[1;30m\]\[\033[0;37m\]`__git_ps1 " (%s)"`\[\033[00m\]\[\033[0;37m\]\$ '
-PS1='\[\033[0;36m\]\u \[\033[00m\]in: \[\033[0;35m\]\w\[\033[00m\]\[\033[1;30m\]\[\033[0;37m\]` `\[\033[00m\]\[\033[0;37m\]\n- '
+#PS1='\[\033[0;36m\]\u \[\033[00m\]in: \[\033[0;35m\]\w\[\033[00m\]\[\033[1;30m\]\[\033[0;37m\]` `\[\033[00m\]\[\033[0;37m\]\n- '
 # PS1='\[\033[0;36m\]\u \[\033[00m\]in: \[\033[0;35m\]\w\[\033[00m\]\[\033[1;30m\]\[\033[0;37m\]`__git_ps1 " (%s)"`\[\033[00m\]\[\033[0;37m\]\n- '
 # PS1='\[\033[0;36m\]\u \[\033[00m\]in: \[\033[0;35m\]\w\[\033[00m\]\[\033[1;30m\]\[\033[0;37m\]`__git_ps1 " (%s)"`\[\033[00m\]\[\033[0;37m\]\n`set_prefix2` '
 
