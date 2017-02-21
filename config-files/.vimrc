@@ -1,3 +1,5 @@
+execute pathogen#infect()
+
 " Theme Options
 if has("gui_macvim")
     set shell=/bin/bash\ -l
@@ -20,8 +22,8 @@ else
 endif
 
 " using Source Code Pro
-set anti enc=utf-8
-set guifont=Source\ Code\ Pro:h13
+"set anti enc=utf-8
+"set guifont=Source\ Code\ Pro:h13
 
 " Make vim more useful
 set nocompatible
@@ -116,8 +118,6 @@ function! StripWhitespace ()
 endfunction
 noremap <leader>sw :call StripWhitespace ()<CR>
 
-execute pathogen#infect()
-
 set clipboard=unnamed
 filetype plugin indent on
 
@@ -169,6 +169,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'triglav/vim-visual-increment'
 Plugin 'flowtype/vim-flow'
 Plugin 'ap/vim-css-color'
+Plugin 'airblade/vim-gitgutter'
 
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
@@ -187,8 +188,9 @@ endfunction
 noremap <leader>x :call ReadJSAsJsx () <CR>
 noremap <leader>sx :set syntax=javascript.jsx<CR>
 noremap <leader>sh :set syntax=html<CR>
-
-
+noremap <leader>st :SyntasticToggleMode<CR>
+noremap <leader>bd :set background=dark<CR>
+noremap <leader>bl :set background=light<CR>
 
 " NOTE: All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -346,6 +348,8 @@ nnoremap <leader>jm :set filetype=jasmine.javascript syntax=jasmine
 
 " nerdtree line numbers
 let NERDTreeShowLineNumbers=1
+" show file in nerdtree
+noremap <leader>f :NERDTreeFind<CR>
 
 " indent linebreaks
 " set breakindent
@@ -398,7 +402,7 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_mode_map = { 'mode': 'active',
-                          \ 'active_filetypes': ['python', 'javascript'],
+                          \ 'active_filetypes': ['python', 'javascript', 'css'],
                           \ 'passive_filetypes': [] }
 
 let g:syntastic_auto_loc_list = 1
@@ -408,7 +412,10 @@ let g:syntastic_check_on_open = 1
 let g:go_list_type = "quickfix"
 let g:syntastic_check_on_wq = 0 
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_css_checkers = ['stylelint']
 let s:eslint_path =system('PATH=$(npm bin):$PATH && which eslint')
 let g:syntastic_javascript_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+
+"let g:Powerline_symbols = 'fancy'
