@@ -181,11 +181,14 @@ Bundle 'glanotte/vim-jasmine'
 " Optional:
 Bundle "honza/vim-snippets"
 
-function! ReadJSAsJsx() 
+function! ReadAsJSX() 
     let g:jsx_ext_required = 0
 endfunction
 
-noremap <leader>x :call ReadJSAsJsx () <CR>
+" JSX syntax in .js files
+let g:jsx_ext_required = 1
+" to revert that, run ReadAsJSX
+noremap <leader>x :call ReadAsJSX () <CR>
 noremap <leader>sx :set syntax=javascript.jsx<CR>
 noremap <leader>sh :set syntax=html<CR>
 noremap <leader>st :SyntasticToggleMode<CR>
@@ -414,6 +417,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_css_checkers = ['stylelint']
 let s:eslint_path =system('PATH=$(npm bin):$PATH && which eslint')
+let s:stylelint_path =system('PATH=$(npm bin):$PATH && which stylelint')
 let g:syntastic_javascript_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
