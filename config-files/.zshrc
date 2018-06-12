@@ -154,7 +154,7 @@ export PATH
 export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
 
 ### Sourcing rvm so it can be run as function
-#source "$HOME/.rvm/scripts/rvm"
+source "$HOME/.rvm/scripts/rvm"
 
 ## export MANPATH="/usr/local/man:$MANPATH"
 source $ZSH/oh-my-zsh.sh
@@ -240,6 +240,9 @@ alias gci='git commit'
 #git commit 
 alias gcim='git commit -m'
 
+#git add, stash,  pull and pop
+alias pullop='git add .; git stash; git pull; git stash pop;'
+
 #git branches
 alias branches='git branch -v -a'
 
@@ -261,8 +264,6 @@ alias nw='/Applications/nwjs.app/Contents/MacOS/nwjs'
 # previous folder
 alias ...='cd -'
 
-# Powerline Stuf -------------------------
-
 # Setting vim mode in terminal --------------
 alias vimmode="set -o vi"
 
@@ -275,8 +276,28 @@ alias weatherporto='curl http://wttr.in/Porto'
 # ranger alias
 alias ra='ranger'
 
+# iOS simulator
+alias smlt='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app';
+
+# cheat.sh
+function __cheat() {                                                                
+    curl cheat.sh/$1
+} 
+
+alias cheat='__cheat'
+
+
 # z jumper init
 . /Users/capelo/workspace/personal/z/z.sh
+
+# remove all .swp (vim temp files) from current dir
+alias removeSwps="find . -name '*.swp' -print0 | xargs -0 trash -i --"
+
+# Build default tmux dev sessions
+alias tmux-dev-session="sh ~/.config/default-tmux-session.sh"
+
+# FFS NPM...
+alias ffs-npm="rm -rf node_modules && npm install"
 
 export NVM_DIR="/Users/capelo/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -299,3 +320,4 @@ stt_both  () { setTerminalText 0 $@; }
 stt_tab   () { setTerminalText 1 $@; }
 stt_title () { setTerminalText 2 $@; }
 
+export PYTHONPATH=$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH
