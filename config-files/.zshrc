@@ -1,4 +1,4 @@
-plugins=(git colored-man colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting)
+plugins=(git colored-man colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting osx web-search)
 
 DISABLE_AUTO_TITLE="true"
 
@@ -148,6 +148,8 @@ PATH=$PATH:$HOME/.node/bin
 PATH=$PATH:$HOME/.rvm/bin
 PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
 PATH=$PATH:/usr/local/bin/eslint
+PATH=$PATH:/usr/local/bin/python
+PATH=$PATH:$HOME/.npm-packages/bin
 
 export PATH
 
@@ -321,3 +323,4 @@ stt_tab   () { setTerminalText 1 $@; }
 stt_title () { setTerminalText 2 $@; }
 
 export PYTHONPATH=$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH
+export USER=`whoami`
