@@ -148,35 +148,35 @@ Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'tmhedberg/matchit'
 Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-fugitive'
-Plugin 'burnettk/vim-angular'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-scripts/gitignore'
-Plugin 'leafgarland/typescript-vim'
 " vim easy find accross current dir
 Plugin 'dkprice/vim-easygrep'
 Plugin 'mxw/vim-jsx'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'vim-scripts/copypath.vim'
 Plugin 'isRuslan/vim-es6'
-Plugin 'mustache/vim-mustache-handlebars'
 "Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'rhysd/devdocs.vim'
-Plugin 'bentayloruk/vim-react-es6-snippets'
-Plugin 'scrooloose/syntastic'
 Plugin 'triglav/vim-visual-increment'
 Plugin 'flowtype/vim-flow'
 Plugin 'ap/vim-css-color'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'janko-m/vim-test'
+Plugin 'w0rp/ale'
+Plugin 'alvan/vim-closetag'
+Plugin 'posva/vim-vue'
+
+
 
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle 'glanotte/vim-jasmine'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'garbas/vim-snipmate'
 
 " Optional:
 Bundle "honza/vim-snippets"
@@ -191,7 +191,6 @@ let g:jsx_ext_required = 1
 noremap <leader>x :call ReadAsJSX () <CR>
 noremap <leader>sx :set syntax=javascript.jsx<CR>
 noremap <leader>sh :set syntax=html<CR>
-noremap <leader>st :SyntasticToggleMode<CR>
 noremap <leader>bd :set background=dark<CR>
 noremap <leader>bl :set background=light<CR>
 
@@ -353,6 +352,8 @@ nnoremap <leader>jm :set filetype=jasmine.javascript syntax=jasmine
 let NERDTreeShowLineNumbers=1
 " show file in nerdtree
 noremap <leader>f :NERDTreeFind<CR>
+" Toggle relative number / relative line number
+noremap <leader>n :set relativenumber!<CR>
 
 " indent linebreaks
 " set breakindent
@@ -398,28 +399,71 @@ au filetype javascript :iabbrev RTxt <Text></Text>
 
 noremap <leader>pfd :put =expand('%:p')<CR>
 
-" Syntastic options
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_mode_map = { 'mode': 'active',
-                          \ 'active_filetypes': ['python', 'javascript', 'css'],
-                          \ 'passive_filetypes': [] }
-
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-"let g:syntastic_error_symbol = '✗'
-"let g:syntastic_warning_symbol = '⚠'
 let g:go_list_type = "quickfix"
-let g:syntastic_check_on_wq = 0 
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_css_checkers = ['stylelint']
-let s:eslint_path =system('PATH=$(npm bin):$PATH && which eslint')
-let s:stylelint_path =system('PATH=$(npm bin):$PATH && which stylelint')
-let g:syntastic_javascript_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
-nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
 
 "let g:Powerline_symbols = 'fancy'
+
+" mapping for ctrlp-ing into what was last selected in visual mode
+nmap <leader>p :CtrlP<CR><C-\>v
+
+" enable mouse inside tmux vim
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
+
+let test#javascript#jest#file_pattern = '.spec\.js'
+let test#javascript#runner = 'jest'
+
+" :ALEFix will try and fix your JS code with ESLint.
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'css': ['stylelint'],
+\}
+
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_filetype_changed = 0
+
+
+noremap <leader><leader>f :ALEFix<CR>
+
+" Set this setting in vimrc if you want to fix files automatically on save.
+" This is off by default.
+let g:ale_fix_on_save = 0
+
+set cursorline!
+set lazyredraw
+
+cnoremap <C-b> <S-Left>
+cnoremap <C-n> <S-Right>
+
+" Closetag setup
+" filenames like *.xml, *.html, *.xhtml, ...
+" Then after you press > in these files, this plugin will try to close the current tag.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *.js'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non closing tags self closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx, *.js'
+
+" integer value [0|1]
+" This will make the list of non closing tags case sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
+
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+"
+let g:closetag_close_shortcut = '<leader>>'
+

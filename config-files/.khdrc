@@ -10,8 +10,8 @@ alt - j : chunkc tiling::window --focus south
 alt - k : chunkc tiling::window --focus north
 alt - l : chunkc tiling::window --focus east
 
-cmd - j : chunkc tiling::window --focus prev
-cmd - k : chunkc tiling::window --focus next
+# cmd - j : chunkc tiling::window --focus prev
+# cmd - k : chunkc tiling::window --focus next
 
 # equalize size of windows
 shift + alt - 0 : chunkc tiling::desktop --equalize
@@ -32,10 +32,10 @@ shift + cmd - l : chunkc tiling::window --warp east
 shift + alt - up     : chunkc tiling::window --grid-layout 1:1:0:0:1:1
 
 # make floating window fill left-half of screen
-shift + alt - left   : chunkc tiling::window --grid-layout 1:2:0:0:1:1
+# shift + alt - left   : chunkc tiling::window --grid-layout 1:2:0:0:1:1
 
 # make floating window fill right-half of screen
-shift + alt - right  : chunkc tiling::window --grid-layout 1:2:1:0:1:1
+# shift + alt - right  : chunkc tiling::window --grid-layout 1:2:1:0:1:1
 
 # move floating windows / windows on a grid space
 # 10 rows 10 cols grid, windows left and top on 0 grid, and have 5 grid width 5 grid height
@@ -54,8 +54,8 @@ shift + alt - 6 : chunkc tiling::window --send-to-desktop 6
 
 # send window to desktop and switch desktop
 shift + cmd - x : `id=$(chunkc get _last_active_desktop); chunkc tiling::window -d $id; khd -p "cmd + alt - $id" &> /dev/null`
-shift + cmd - z : chunkc tiling::window -d prev; khd -p "cmd + alt - z"
-shift + cmd - c : chunkc tiling::window -d next; khd -p "cmd + alt - c"
+# shift + cmd - z : chunkc tiling::window -d prev; khd -p "cmd + alt - z"
+# shift + cmd - c : chunkc tiling::window -d next; khd -p "cmd + alt - c"
 shift + cmd - 1 : chunkc tiling::window -d 1; khd -p "cmd + alt - 1"
 shift + cmd - 2 : chunkc tiling::window -d 2; khd -p "cmd + alt - 2"
 shift + cmd - 3 : chunkc tiling::window -d 3; khd -p "cmd + alt - 3"
@@ -146,6 +146,6 @@ ctrl + alt - w : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
 - capslock : khd -p "- escape"
 
 # key remap for norwegian layout \ { }
-cmd - 7 : khd -p "shift + alt - 7"
-cmd - 8 : khd -p "shift + alt - 8"
-cmd - 9 : khd -p "shift + alt - 9"
+# cmd - 7 : khd -p "shift + alt - 7"
+# cmd - 8 : khd -p "shift + alt - 8"
+# cmd - 9 : khd -p "shift + alt - 9"
