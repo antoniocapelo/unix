@@ -1,21 +1,12 @@
-[user]
-    name = Capelo
-    email = antonio.c.capelo@gmail.com
 [core]
-    editor = vim
-    excludesfile = /Users/capelo/.gitignore
-[push]
-    default = simple
-[alias]
-    c = commit -am
-    s = status -s
-    df =status diff --color --color-words --abbrev
-    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-[color]
-    ui = always
-[apply]
-    whitespace = fix
-[merge]
-    log = true
+	excludesfile = /Users/capelo/.gitignore
+[user]
+	email = antonio.c.capelo@gmail.com
+	name = Capelo
 [diff]
-    tool = vimdiff
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	d = difftool
+	pushf = push --force-with-lease
