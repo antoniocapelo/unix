@@ -124,7 +124,7 @@ filetype plugin indent on
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+" set runtimepath^=~/.vim/bundle/ctrlp.vim
 set iskeyword+=\-
 
 " set the runtime path to include Vundle and initialize
@@ -169,8 +169,9 @@ Plugin 'janko-m/vim-test'
 Plugin 'w0rp/ale'
 Plugin 'alvan/vim-closetag'
 Plugin 'posva/vim-vue'
-
-
+" Plugin 'ctrlp.vim'
+Plugin 'vim-colors-solarized'
+Plugin 'vim-prettier'
 
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
@@ -196,6 +197,15 @@ noremap <leader>bl :set background=light<CR>
 
 " NOTE: All of your Plugins must be added before the following line
 call vundle#end()            " required
+
+call plug#begin('~/.vim/plugged')
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+" Initialize plugin system
+call plug#end()
+
+
+
 " Plugins END ----------------------------
 
 filetype plugin indent on    " required
@@ -241,16 +251,16 @@ endif
 
 " JavaScript libraries syntax
 let g:used_javascript_libs = 'angularjs,react,underscore'
-let g:ctrlp_open_new_file = 'v'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_open_multiple_files = 'v'
+" let g:ctrlp_open_new_file = 'v'
+" let g:ctrlp_show_hidden = 1
+" let g:ctrlp_open_multiple_files = 'v'
 
 " Exclude files and directories using Vim's wildignore and CtrlP's own g:ctrlp_custom_ignore:
 " Ignore some folders and files for CtrlP indexing
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|node_modules$',
-  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
-  \ }
+" let g:ctrlp_custom_ignore = {
+  " \ 'dir':  '\.git$\|\.yardoc\|node_modules$',
+  " \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+  " \ }
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
@@ -280,6 +290,10 @@ set splitright
 " Use Ctrl-j and Ctrl-k for navigation to same indentation
 nnoremap <C-k> :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' . line('.') . 'l\S', 'be')<CR>
 nnoremap <C-j> :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%>' . line('.') . 'l\S', 'e')<CR>
+
+" fzf vim mappings
+nnoremap <C-p> :Files<CR>
+nnoremap <C-l> :Buffers<CR>
 
 " Use ,W to strip all trailing whitespace on current file
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
@@ -328,7 +342,7 @@ nmap K <Plug>(devdocs-under-cursor)
 " using Tab for calling out Ctrl-P
 " imap <Tab> <C-P>
 
-inoremap <leader>p <C-x><C-o>
+" inoremap <leader>p <C-x><C-o>
 
 set omnifunc=csscomplete#CompleteCSS
 set omnifunc=syntaxcomplete#Complete
@@ -406,9 +420,6 @@ let g:NERDSpaceDelims = 1
 
 "let g:Powerline_symbols = 'fancy'
 
-" mapping for ctrlp-ing into what was last selected in visual mode
-nmap <leader>p :CtrlP<CR><C-\>v
-
 " enable mouse inside tmux vim
 if has("mouse_sgr")
     set ttymouse=sgr
@@ -467,3 +478,4 @@ let g:closetag_shortcut = '>'
 "
 let g:closetag_close_shortcut = '<leader>>'
 
+let g:NERDTreeNodeDelimiter = "\u00a0"

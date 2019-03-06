@@ -1,6 +1,11 @@
-plugins=(git colored-man colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting osx web-search)
+plugins=(git colored-man colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting osx web-search fzf)
 
 DISABLE_AUTO_TITLE="true"
+
+_has() {
+  return $( whence $1 >/dev/null )
+}
+
 
 # Initializes Oh My Zsh
 
@@ -89,24 +94,24 @@ done
 unset config_file
 
 # Load the theme
-if [ "$ZSH_THEME" = "random" ]; then
-    themes=($ZSH/themes/*zsh-theme)
-    N=${#themes[@]}
-    ((N=(RANDOM%N)+1))
-    RANDOM_THEME=${themes[$N]}
-    source "$RANDOM_THEME"
-    echo "[oh-my-zsh] Random theme '$RANDOM_THEME' loaded..."
-else
-    if [ ! "$ZSH_THEME" = ""  ]; then
-        if [ -f "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme" ]; then
-            source "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme"
-        elif [ -f "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme" ]; then
-            source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"
-        else
-            source "$ZSH/themes/$ZSH_THEME.zsh-theme"
-        fi
-    fi
-fi
+# if [ "$ZSH_THEME" = "random" ]; then
+#     themes=($ZSH/themes/*zsh-theme)
+#     N=${#themes[@]}
+#     ((N=(RANDOM%N)+1))
+#     RANDOM_THEME=${themes[$N]}
+#     source "$RANDOM_THEME"
+#     echo "[oh-my-zsh] Random theme '$RANDOM_THEME' loaded..."
+# else
+#     if [ ! "$ZSH_THEME" = ""  ]; then
+#         if [ -f "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme" ]; then
+#             source "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme"
+#         elif [ -f "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme" ]; then
+#             source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"
+#         else
+#             source "$ZSH/themes/$ZSH_THEME.zsh-theme"
+#         fi
+#     fi
+# fi
 
 
 
@@ -122,7 +127,7 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="ys"
 ZSH_THEME="solarized-powerline"
 #ZSH_THEME=""
-#ZSH_THEME="agnoster"
+# SH_THEME="agnoster"
 #ZSH_THEME="powerline"
 ZSH_POWERLINE_SHOW_IP=false
 ZSH_POWERLINE_SHOW_OS=false
@@ -156,7 +161,7 @@ export PATH
 export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
 
 ### Sourcing rvm so it can be run as function
-source "$HOME/.rvm/scripts/rvm"
+## source "$HOME/.rvm/scripts/rvm"
 
 ## export MANPATH="/usr/local/man:$MANPATH"
 source $ZSH/oh-my-zsh.sh
@@ -290,7 +295,7 @@ alias cheat='__cheat'
 
 
 # z jumper init
-. /Users/capelo/workspace/personal/z/z.sh
+. /Users/capelo/workspace/tools/z/z.sh
 
 # remove all .swp (vim temp files) from current dir
 alias removeSwps="find . -name '*.swp' -print0 | xargs -0 trash -i --"
@@ -324,3 +329,22 @@ stt_title () { setTerminalText 2 $@; }
 
 export PYTHONPATH=$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH
 export USER=`whoami`
+
+# Changing FZF defaults
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+
+# fzf via Homebrew
+if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
+  source /usr/local/opt/fzf/shell/key-bindings.zsh
+  source /usr/local/opt/fzf/shell/completion.zsh
+fi
+
+# fzf + ag configuration
+if _has fzf && _has ag; then
+  export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_DEFAULT_OPTS='
+  --color info:108,prompt:109,spinner:108,pointer:168,marker:168
+  '
+fi
