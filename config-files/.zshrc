@@ -215,6 +215,7 @@ alias ll='ls -lha --color=auto'
 # Global aliases
 alias vi='vim'
 alias v='vim'
+alias nv='nvim'
 alias h="hg"
 alias s="subl"
 alias o="open"
@@ -306,6 +307,8 @@ alias tmux-dev-session="sh ~/.config/default-tmux-session.sh"
 # FFS NPM...
 alias ffs-npm="rm -rf node_modules && npm install"
 
+alias beep='echo -e "\a"'
+
 export NVM_DIR="/Users/capelo/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
@@ -341,10 +344,11 @@ fi
 
 # fzf + ag configuration
 if _has fzf && _has ag; then
-  export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+  export FZF_DEFAULT_COMMAND='ag --nocolor --ignore node_modules -g ""'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_DEFAULT_OPTS='
   --color info:108,prompt:109,spinner:108,pointer:168,marker:168
   '
 fi
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
