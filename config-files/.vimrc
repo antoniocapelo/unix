@@ -5,16 +5,14 @@ if has("gui_macvim")
     set shell=/bin/bash\ -l
 endif
 
-if !has("gui_running")
-    "let g:solarized_termtrans=1
-    "let g:solarized_termcolors=256
-endif
-
 syntax enable
 set background=dark
+
+" set term=xterm-256color
+let g:solarized_termtrans=1
 colorscheme solarized
 
-"
+
 if has('gui_running')
     set background=light
 else
@@ -193,7 +191,8 @@ noremap <leader>x :call ReadAsJSX () <CR>
 noremap <leader>sx :set syntax=javascript.jsx<CR>
 noremap <leader>sh :set syntax=html<CR>
 noremap <leader>bd :set background=dark<CR>
-noremap <leader>bl :set background=light<CR>
+noremap <leader>bl :let g:solarized_termtrans=0<CR>:set background=light<CR>
+
 
 " NOTE: All of your Plugins must be added before the following line
 call vundle#end()            " required
