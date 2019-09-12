@@ -317,7 +317,14 @@ nmap <leader>l <C-w>l
 nmap <leader>h <C-w>h
 
 " ,s to activate or deactive spellcheck
-nnoremap <leader>s :setlocal spell!<cr>
+nnoremap <leader>s :setlocal spell!<cr>set complete+=kspell<CR>
+" automatically turn on spell-checking for Markdown files
+autocmd BufRead,BufNewFile *.md setlocal spell
+" automatically set 80char text width
+au BufRead,BufNewFile *.md setlocal textwidth=80 formatoptions+=t
+" Ctrl+L while in insert mode - correct the previous spelling mistake
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+
 
 "visual selection of the lines that have the same indent level or more as the current line.
 function! SelectIndent ()
