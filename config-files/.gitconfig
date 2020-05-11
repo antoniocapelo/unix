@@ -9,4 +9,6 @@
 	prompt = false
 [alias]
 	d = difftool
+	s = difftool --tool=vimdiff HEAD~..HEAD
 	pushf = push --force-with-lease
+
