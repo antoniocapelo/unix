@@ -1,4 +1,4 @@
-plugins=(git colored-man colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting osx web-search fzf)
+plugins=(git colored-man-pages colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting osx web-search fzf)
 
 DISABLE_AUTO_TITLE="true"
 
