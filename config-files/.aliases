@@ -1,0 +1,98 @@
+## Aliases
+
+# Create a new directory and enter it
+function mkcd() {
+    mkdir -p "$@" && cd "$@"
+}
+
+alias remdir='rm -rf'
+
+# Copy w/ progress
+cp_p () {
+  rsync -WavP --human-readable --progress $1 $2
+}
+
+# change the osx vim to the brew one (if it exists)
+#if [ -f /usr/local/bin/vim ]; then
+    #alias vim='/usr/local/bin/vim'
+#fi
+
+# better ls
+alias ll='ls -lha --color=auto'
+
+# Global aliases
+alias vi='vim'
+alias v='vim'
+alias nv='nvim'
+alias h="hg"
+alias s="subl"
+alias o="open"
+alias oo="open ."
+alias mvim="/Applications/MacVim.app/contents/MacOS/MacVim"
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder"
+
+# Git stuff 
+
+alias g="git"
+
+# Git push origin master
+alias gitpom='git push origin master'
+
+#git status
+alias gs='git status'
+
+#git diff
+alias gd='git difftool'
+
+#git checkout 
+alias gco='git checkout'
+
+#git commit 
+alias gci='git commit'
+
+#git commit 
+alias gcim='git commit -m'
+
+#git add, stash,  pull and pop
+alias pullop='git add .; git stash; git pull; git stash pop;'
+
+#git branches
+alias branches='git branch -v -a'
+
+# NPM, please
+alias npmo='sudo npm'
+
+# be nice
+alias please=sudo
+
+alias nw='/Applications/nwjs.app/Contents/MacOS/nwjs'
+
+# previous folder
+alias ...='cd -'
+
+# Setting vim mode in terminal --------------
+alias vimmode="set -o vi"
+
+# List all open ports (and processes using them)
+alias lsp='sudo lsof -i -n -P | grep LISTEN'
+
+# weather alias
+alias weatherporto='curl http://wttr.in/Porto'
+
+# ranger alias
+alias ra='ranger'
+
+# remove all .swp (vim temp files) from current dir
+alias removeSwps="find . -name '*.swp' -print0 | xargs -0 trash -i --"
+
+# Build default tmux dev sessions
+alias tmux-dev-session="sh ~/.config/default-tmux-session.sh"
+
+# FFS NPM...
+alias ffs-npm="rm -rf node_modules && npm install"
+
+alias beep='echo -e "\a"'
+
