@@ -577,6 +577,7 @@ set ttimeoutlen=0               "Fast escape
 set foldcolumn=0                "Hide fold column
 set diffopt+=vertical           "Vertical diff
 syntax on                       "Turn on syntax highlighting
+set iskeyword+=-
 
 " ================================================
 " Colors
