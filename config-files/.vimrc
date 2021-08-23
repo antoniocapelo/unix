@@ -3,8 +3,6 @@
 " Color scheme
 " ================================================
 
-let base16colorspace=256
-set background=dark
 " set termguicolors
 
 
@@ -80,7 +78,7 @@ Plug 'xolox/vim-session'
 "" Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'danielwe/base16-vim'
+Plug 'chriskempson/base16-vim'
 
 "*****************************************************************************
 "" Custom bundles
@@ -600,3 +598,10 @@ hi clear CursorLine
 hi Normal ctermbg=NONE guibg=NONE
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+" Make vim adapt to current base16 color scheme
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
