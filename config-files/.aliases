@@ -96,3 +96,13 @@ alias ffs-npm="rm -rf node_modules && npm install"
 
 alias beep='echo -e "\a"'
 
+# Calendar events
+function ev () {
+    if [ $1 ]; then
+        daysToAdd=$1
+    else
+        daysToAdd=0
+    fi
+
+    icalBuddy -f -npn -iep 'title,datetime' -ps '| : |' -po 'datetime,title' -eed eventsToday+$daysToAdd
+}
