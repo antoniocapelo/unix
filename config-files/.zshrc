@@ -111,3 +111,5 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 
 
 base16_nord
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
