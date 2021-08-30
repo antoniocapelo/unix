@@ -111,6 +111,13 @@ Plug 'posva/vim-vue'
 Plug 'leafOfTree/vim-vue-plugin'
 
 
+" fzf vim mappings
+nnoremap <C-p> :Files<CR>
+nnoremap <C-l> :Buffers<CR>
+
+" fzf layout
+let g:fzf_layout = { 'down': '~40%' }
+
 
 "*****************************************************************************
 "*****************************************************************************
@@ -604,4 +611,5 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
+
 
