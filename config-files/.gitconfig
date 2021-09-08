@@ -16,3 +16,5 @@
 	autocorrect = 30
 [pull]
 	ff = only
+[push]
+	default = current
