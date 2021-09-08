@@ -12,3 +12,7 @@
 	s = difftool --tool=vimdiff HEAD~..HEAD
 	pushf = push --force-with-lease
 
+[help]
+	autocorrect = 30
+[pull]
+	ff = only
