@@ -96,6 +96,14 @@ alias ffs-npm="rm -rf node_modules && npm install"
 
 alias beep='echo -e "\a"'
 
+alias dcu='docker-compose up -d --quiet-pull --build'
+
+alias :q='exit'
+
+alias nova='open -a "quicktime player" https://centova.radio.com.pt/proxy/528\?mp=/stream'
+
+alias emac='emacs &'
+
 # Calendar events
 function ev () {
     if [ $1 ]; then
@@ -106,3 +114,20 @@ function ev () {
 
     icalBuddy -f -npn -iep 'title,datetime' -ps '| : |' -po 'datetime,title' -eed eventsToday+$daysToAdd
 }
+
+# Glab
+alias my-mrs='glab mr list --assignee=@me'
+alias mrs-to-review='glab mr list --reviewer=@me'
+alias my-issues='glab issue list --assignee=@me -R remote-com/employ-starbase/tracker'
+alias open-issues='glab issue list -R remote-com/employ-starbase/tracker -l team::payroll_processing -l "flow::ready for dev"'
+
+function view-issue() {
+    glab issue view $1 -R remote-com/employ-starbase/tracker
+}
+
+alias tigerup='git pull && mix deps.get && mix ecto.reset && mix phx.server'
+alias dragonup='git pull && yarn && yarn run dev:employ'
+alias dev='yarn run dev:employ'
+alias tiger='mix phx.server'
+alias nvim='~/workspace/personal/nvim-macos/bin/nvim'
+alias ywe='yarn workspace @remote-com/employ'

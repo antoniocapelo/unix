@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.emacs.d/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/capelo/.oh-my-zsh"
@@ -70,9 +70,19 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+	git
+	bundler
+ 	asdf
+	macos
+	npm
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
+# source ~/workspace/personal/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+
 
 # User configuration
 
@@ -101,7 +111,12 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 source ~/.aliases
-# source ~/.load-iterm-colors
+
+# Z jumper
+. ~/workspace/personal/tools/z/z.sh
+
+
+
 # Base16 Shell
 
 BASE16_SHELL="$HOME/.config/base16-shell/"
@@ -110,6 +125,22 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
                 eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 
-base16_nord
+base16_material
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# AWS Config
+export AWS_PROFILE=sts
+
+# Remotectl config
+source <(remotectl completion zsh)
+compdef _remotectl remotectl
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export EDITOR='vim'
+export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
+
