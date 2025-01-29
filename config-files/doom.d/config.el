@@ -71,8 +71,8 @@
   (setq org-todo-keywords
        '((sequence "TODO" "DOING" "BLOCKED" "REVIEW" "|" "DONE" "ARCHIVED"))))
 
-  (with-eval-after-load 'org
-    (setq org-todo-keyword-faces
-         '(("BLOCKED" . "FireBrick")
-           ("REVIEW" . "Teal")
-           ("DOING" .  "Yellow"))))
+(with-eval-after-load 'org
+  (setq org-todo-keyword-faces
+       '(("BLOCKED" . "FireBrick")
+         ("REVIEW" . "Teal")
+         ("DOING" .  "Yellow"))))
