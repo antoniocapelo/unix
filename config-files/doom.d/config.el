@@ -43,6 +43,8 @@
 (setq default-directory "/Users/capelo/Dropbox/org" )
 (setq org-directory "/Users/capelo/Dropbox/org" )  ;; Set your org directory
 
+
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
@@ -221,4 +223,14 @@
 ;;   :after (treemacs)
 ;;   :ensure t
 ;;   :config (treemacs-set-scope-type 'Tabs))
+
+
+;; (with-eval-after-load 'flycheck
+;;   (flycheck-grammarly-setup))
+
+;; If you encounter the performance issue, try raise flycheck-grammarly-check-time higher. The request will be send by this time everytime the buffer has changed.
+;; (setq flycheck-grammarly-check-time 0.8)
+
+(map! :leader
+      (:prefix-map ("t" . "toggle")
 
