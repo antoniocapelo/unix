@@ -44,7 +44,6 @@
 (setq org-directory "/Users/capelo/Dropbox/org" )  ;; Set your org directory
 
 
-
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
@@ -76,7 +75,6 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-
 (with-eval-after-load 'org
   (setq org-todo-keywords
        '((sequence "TODO" "DOING" "BLOCKED" "REVIEW" "|" "DONE" "ARCHIVED"))))
@@ -233,4 +231,5 @@
 
 (map! :leader
       (:prefix-map ("t" . "toggle")
-))
+       :desc "Olivetti mode" "o" #'olivetti-mode))
+
